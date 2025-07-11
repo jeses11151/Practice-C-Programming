@@ -1,16 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h> 
 
-void demo_integer_array() {
+void demo_integer_array() 
+{
     int numbers[5] = {10, 20, 30, 40, 50};
+
     printf("\n=== Integer Array ===\n");
     for (int i = 0; i < 5; i++) {
         printf("numbers[%d] = %d, address = %p\n", i, numbers[i], (void*)&numbers[i]);
     }
 }
 
-void demo_character_array() {
+void demo_character_array() 
+{
     char letters[] = {'A', 'B', 'C', 'D', 'E', '\0'};
+
     printf("\n=== Character Array ===\n");
     printf("letters as string: %s\n", letters);  // Print as string
     for (int i = 0; i < 5; i++) {
@@ -18,7 +24,8 @@ void demo_character_array() {
     }
 }
 
-void demo_string_array() {
+void demo_string_array() 
+{
     const char *words[] = {"Hello", "World", "Array", "of", "Strings"};
     printf("\n=== Array of Strings ===\n");
     for (int i = 0; i < 5; i++) {
@@ -27,8 +34,19 @@ void demo_string_array() {
     }
 }
 
-void demo_dynamic_array() {
-    int *dyn = malloc(5 * sizeof(int));
+#define ARRAY_SIZE 5        
+void demo_dynamic_array() 
+{
+    int *dyn = NULL;
+
+    dyn = (int *)malloc(ARRAY_SIZE * sizeof(int));
+    if (!dyn) {
+        perror("Failed to allocate memory");
+        exit(EXIT_FAILURE);
+    }
+    // Init array
+    memset(dyn, 0, ARRAY_SIZE * sizeof(int)); 
+
     printf("\n=== Dynamic Integer Array ===\n");
     if (dyn) {
         for (int i = 0; i < 5; i++) {
@@ -41,19 +59,25 @@ void demo_dynamic_array() {
     }
 }
 
-void demo_uninit_array() {
+void demo_uninit_array() 
+{
     int uninit[5];
+
     printf("\n=== Uninitialized Integer Array ===\n");
     for (int i = 0; i < 5; i++) {
         printf("uninit[%d] = %d, address = %p (value is garbage)\n", i, uninit[i], (void*)&uninit[i]);
     }
 }
 
-void demo_runtime_array() {
-    int n;
+void demo_runtime_array() 
+{
+    int n = 0;
+    int runtime[n];  // Variable Length Array (C99)
+    memset(runtime, 0, n * sizeof(int));
+
     printf("\nEnter size of runtime array: ");
     scanf("%d", &n);
-    int runtime[n];  // Variable Length Array (C99)
+
     printf("\n=== Runtime-sized Array (VLA) ===\n");
     for (int i = 0; i < n; i++) {
         runtime[i] = i + 1;
@@ -61,7 +85,8 @@ void demo_runtime_array() {
     }
 }
 
-void demo_double_pointer() {
+void demo_double_pointer() 
+{
     int x = 42;
     int *p = &x;
     int **pp = &p;
@@ -75,15 +100,46 @@ void demo_double_pointer() {
     printf("**pp (value at *pp = *p = x) = %d\n", **pp);
 }
 
-int add(int a, int b) {
-    return a + b;
-}
+int add(int a, int b) { return a + b; }
+int subtract(int a, int b) { return a + b; }
+int multiply(int a, int b){ return a * b; }
+int divide(int a, int b){ return a / b; }
 
-void demo_function_pointer() {
-    int (*func_ptr)(int, int) = &add;
+int my_math_array[] = 
+{
+    {"plus", add},
+    {"minus", subtract},
+    {"times", multiply},
+    {"divide", divide}
+};
+
+void demo_function_pointer() //function pointer or callback
+{
+    int a = 0;
+    int b = 0;
+    char exp[20];
 
     printf("\n=== Function Pointer ===\n");
-    printf("Calling add(5, 7) using function pointer: %d\n", func_ptr(5, 7));
+    printf("type in a simple math expression: \n");
+    printf("eg: 5 plus 3 ");
+    printf("eg: 5 minus 3 ");
+    printf("eg: 5 times 3 ");
+    printf("eg: 5 divide 3 ");
+    scanf("%d %o %d", &a, exp, &b);
+
+    //check expression match with my_math_array[]
+    for (int i = 0; i < sizeof(my_math_array)/sizeof(my_math_array[]); i++){
+        
+    }
+}
+
+int (*func_ptr)(int, int);
+
+void demo_function_pointer(int a, int b, func_ptr cb) 
+{
+    int ret = cb(a, b);
+
+
 }
 
 int main() {

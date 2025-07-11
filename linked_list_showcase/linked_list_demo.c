@@ -7,6 +7,8 @@ struct Node {
     struct Node* next;
 };
 
+__AW_EXTENDED__
+
 int main() {
     // Create nodes
     struct Node* head = malloc(sizeof(struct Node));
