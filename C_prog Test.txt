@@ -1,0 +1,85 @@
+WirelssMobility Software Department C programming test
+
+Basic requirements:
+1. Programming language: C
+2. Use a separate directory for each test question, and use "Number_" as the prefix for the directory name.
+3. Use Makefile as the compilation tool.
+4. Unlimited number of source code files.
+5. The purpose of this test is to make everyone familiar with common programming cases, program design, general functions, etc. 
+6. After the test is completed on Ubuntu, it is necessary to cross-compile and run in the module.
+7. Provide exception handling, such as:
+a. Check whether the function parameters and return values are within a reasonable range.
+b. Check whether the pointer of the input parameter is a null pointer.
+c. Check whether the memory application is successful.
+d. Check the startup dependency between programs.
+
+
+
+
+
+
+
+
+
+
+
+Functional requirements:
+1. Insert the string "Linux" into the string "Embedded Software Engineer", and the result is "Embedded Linux Software Engineer". 
+a. The result is first saved in the buffer and then printed.
+b. Use at least 3 ways to implement string insertion.
+c. Design a function whose parameters include at least the original string, the string to be inserted, and the output string.
+
+2. Implement the string reversal function, such as input "hello world", output "dlrow olleh".
+a. Use at least 2 ways to implement this function.
+b. Design a function whose parameters include at least the original string and the output string. 
+
+3. Calculate the size of the file. a. Use at least 3 ways to implement this function.
+
+4. Read all the contents from a specified binary file and print the file contents to the standard output in the form of continuous hexadecimal strings. You can use the "HxD Hex Editor" tool to generate a simple binary file with a file size of not less than 256 bits. 
+a. Save the result in the buffer first and then print it.
+b. Use uppercase letters as printing.
+c. Use lowercase characters as printing.
+
+5. The string "Embedded, Linux, Software, Engineer, 2025, 06, 02", uses "," in the string as a delimiter, prints each separated string, and if the string can be converted into an integer, prints it as an integer data.
+a. The result is first saved in the buffer and then printed.
+b. Use at least 2 ways to implement this function.
+
+
+6. Use the function pointer (callback function) mechanism to implement a simple calculator that supports addition, subtraction, multiplication and division.
+a. Function interface: int calculate(int a, int b, operation_func op);
+b. Function pointer type definition: typedef int (*operation_func)(int, int);
+c. Design 4 callback functions: addition, subtraction, multiplication and division.
+
+7. Implement an advanced log system, which is required to meet the following requirements:
+a. Use macro definition to implement log output interface.
+i. Such as: LOGD(), LOGI(), LOGW(), LOGE()
+b. Support log level printing:
+i. Log levels: DEBUG, INFO, WARN, ERROR
+ii. Log levels priority: ERROR > WARN > INFO > DEBUG
+c. Use a macro definition (such as LOG_LEVEL) to control the lowest log level of the current output, and logs below this level will not be output;
+d. When each log is printed, it must include the current timestamp, log level, source file name, function name and code line number information, and print the following informations:
+i. Format: [hour.minute.second:millisecond] [log level] [file name:function name:line number] log
+ii. Accuracy of timestamp up to three digits milliseconds.
+e. Sample for log output format:
+i. [13.12.12:256] [ERROR] [filename.c:main():56] report error!
+f. Support log output to standard output, console, file, kernel.
+
+
+
+
+
+8. Create two threads, thread A is used to read files and send data to thread B, thread B receives thread A's data and writes to files.
+a. The program has two parameters, the first parameter is the path to read the file, and the second parameter is the path to write the file.
+b. Communication between threads supports pipes and sockets, and the default communication method can be selected when the program is initialized.
+c. Design the middle layer, and use the same function for communication initialization, sending data, receiving data, and deinitialization.
+d. The middle layer is compiled into a dynamic library, which can provide a communication interface for other programs.
+
+9. Based on the middle layer in the 8th case, design a client program A and a server program B. A reads files and sends data to B, and B receives and saves data.
+a. A has two parameters, the first parameter is the path to read the file, and the second parameter is the path to write the file.
+b. B is a resident application service that receives commands or data sent by A. 
+c. Only when B receives "Start" and sends "Ready" to A, can it accept the file data sent by A.
+d. When B receives "End" and sends "Finished" to A, it will no longer accept the file data sent by A.
+e. Design an error code mechanism. When B receives an error message, it should return an error code to A.
+
+10. Based on the 9th case, support the copy folder function.
+
