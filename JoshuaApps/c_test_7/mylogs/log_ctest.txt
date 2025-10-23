@@ -1,0 +1,5 @@
+[DEBUG q7_log.c:151 test_main()] Debug message
+[ERROR q7_log.c:154 test_main()] Critical failure detected!
+[WARN q7_log.c:153 test_main()] Low memory warning.
+[INFO q7_log.c:152 test_main()] System initialized.
+[DEBUG q7_log.c:151 test_main()] Debug message

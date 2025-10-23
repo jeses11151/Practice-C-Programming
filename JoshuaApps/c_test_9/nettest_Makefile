@@ -1,0 +1,27 @@
+#--------------------------------------------------------------
+#               nettest build only
+#--------------------------------------------------------------
+QL_SDK_PATH   ?= $(shell pwd)/../..
+
+TARGET = nettest
+SRC = nettest.c
+
+#--------------------------------------------------------
+# TOOLS BASIC CONFIG
+#--------------------------------------------------------
+CPPFLAGS = -I./ -I$(QL_TOOLS_PATH)/mdm9607/usr/include -I$(QL_SDK_PATH)/include
+CFLAGS = -Wall -Wextra -I../c_test_8
+LDFLAGS = -L../c_test_8 -lcomms -lpthread
+RPATH = -Wl,-rpath=../c_test_8
+
+CC ?= arm-oe-linux-gnueabi-gcc
+
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(RPATH)
+
+clean:
+	rm -f $(TARGET)
+
+.PHONY: all clean

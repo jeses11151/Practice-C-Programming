@@ -1,0 +1,29 @@
+#!/bin/sh
+ NAME=q9-server-socket
+ DAEMON=/usr/bin/$NAME
+ do_start() {
+    echo "Starting $NAME"
+    start-stop-daemon --start --quiet --background --pidfile /var/run/$NAME.pid --make-pidfile --exec $DAEMON
+ }
+ do_stop() {
+    echo "Stopping $NAME"
+    start-stop-daemon --stop --quiet --pidfile /var/run/$NAME.pid --retry 5
+ }
+ case "$1" in
+    start)
+        do_start
+        ;;
+    stop)
+        do_stop
+        ;;
+    restart)
+        do_stop
+        sleep 1  # Give it a moment to stop
+        do_start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+ esac
+ exit 0
