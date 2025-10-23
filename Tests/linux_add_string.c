@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 #include <string.h>
 
 void save_to_buffer(char *destination, const char *source) 
@@ -61,7 +62,7 @@ int check_dir(const char *dirpath)
 {
     struct stat st = {0};
     if (stat(dirpath, &st) == -1) {
-        return mkdir(dirpath, 0755);  // rwxr-xr-x
+        return mkdir(dirpath, 0755);  // rwxr-xr-x (linux only)
     }
     return 0;
 }

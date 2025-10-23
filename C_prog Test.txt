@@ -45,6 +45,7 @@ a. The result is first saved in the buffer and then printed.
 b. Use at least 2 ways to implement this function.
 
 
+
 6. Use the function pointer (callback function) mechanism to implement a simple calculator that supports addition, subtraction, multiplication and division.
 a. Function interface: int calculate(int a, int b, operation_func op);
 b. Function pointer type definition: typedef int (*operation_func)(int, int);
